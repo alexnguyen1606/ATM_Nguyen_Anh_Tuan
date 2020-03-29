@@ -1,18 +1,25 @@
 package com.atm.model;
 
+import com.atm.builder.AccountBuilder;
+
 public class Account {
     private String fullName;
     private Long totalMoney;
     private  Long accountNumber;
     private String password;
+    private Integer status;
+    private String role;
+    private Long tranferAmount;
+    private Long pickMoney;
 
-    public Account(String fullName, Long totalMoney, Long accountNumber, String password) {
-        this.fullName = fullName;
-        this.totalMoney = totalMoney;
-        this.accountNumber = accountNumber;
-        this.password = password;
+    public Account(AccountBuilder builder){
+        this.fullName = builder.getFullName();
+        this.totalMoney = builder.getTotalMoney();
+        this.accountNumber = builder.getAccountNumber();
+        this.password = builder.getPassword();
+        this.status = builder.getStatus();
+        this.role = builder.getRole();
     }
-
     public Account() {
 
     }
@@ -47,5 +54,38 @@ public class Account {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public Long getTranferAmount() {
+        return tranferAmount;
+    }
+
+    public void setTranferAmount(Long tranferAmount) {
+        this.tranferAmount = tranferAmount;
+
+    }
+
+    public Long getPickMoney() {
+        return pickMoney;
+    }
+
+    public void setPickMoney(Long pickMoney) {
+        this.pickMoney = pickMoney;
     }
 }
