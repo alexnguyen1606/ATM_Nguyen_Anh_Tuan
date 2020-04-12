@@ -2,6 +2,7 @@ package com.atm.views;
 
 import com.atm.controller.MainController;
 import com.atm.model.Account;
+import com.atm.model.Atm;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -22,7 +23,8 @@ public class AdminView {
         System.out.println("2.Thêm tài khoản");
         System.out.println("3.Kích hoạt tài khảon");
         System.out.println("4.Disable tài khoản");
-        System.out.println("5.Đăng xuất");
+        System.out.println("5.Thông tin ATM");
+        System.out.println("6.Đăng xuất");
         Integer adminCheck = scanner.nextInt();
         Integer check = null;
         switch (adminCheck){
@@ -36,8 +38,10 @@ public class AdminView {
                 break;
             case 5:
                 break;
+            case 6:
+                break;
             default:
-                System.out.println("Chỉ được chọn các nút 1-5");
+                System.out.println("Chỉ được chọn các nút 1-6");
                 index();
         }
         return adminCheck;
@@ -71,7 +75,7 @@ public class AdminView {
         scanner.nextLine();
         return accountNumber;
     }
-    public Account addAccount(){
+    public Account formInputAccount(){
         Account account = new Account();
         System.out.println("------Thêm tài khoản---------");
         System.out.println("Nhập số tài khoản:");
@@ -98,5 +102,10 @@ public class AdminView {
         }
         scanner.nextLine();
         return account;
+    }
+    public Integer atmInfo(Atm atm){
+        System.out.println("------Thông tin ATM-------");
+        System.out.println("----Số tiền còn lại:"+atm.getTotalMoney());
+        return 0;
     }
 }

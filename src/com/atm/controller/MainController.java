@@ -6,6 +6,7 @@ import com.atm.controller.HomeController;
 import com.atm.controller.LoginController;
 import com.atm.controller.UserController;
 import com.atm.dao.AccountDAO;
+import com.atm.dao.AtmDAO;
 import com.atm.model.Account;
 import com.atm.model.Atm;
 
@@ -29,7 +30,7 @@ public class MainController {
         LoginController loginController = new LoginController(scanner);
         AdminController adminController = new AdminController(scanner);
         UserController userController = new UserController(scanner);
-        atm = new Atm(100000L);
+       getAtm();
         setAccounts();
         boolean stop=true;
         do {
@@ -123,10 +124,11 @@ public class MainController {
     }
 
     public static Atm getAtm() {
-        return atm;
+        return atm = new AtmDAO().getAtm();
     }
 
     public static void setAtm(Atm atm) {
+
         MainController.atm = atm;
     }
 }

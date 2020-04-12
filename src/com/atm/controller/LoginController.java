@@ -27,7 +27,7 @@ public class LoginController {
             switch (homeCheck){
                 case 1:
                     account = loginView.login();
-                    account = accountService.authetication(MainController.getAccounts(),account);
+                    account = accountService.authetication(account);
                     if (account==null){
                         stop = true;
                         homeCheck = 2;

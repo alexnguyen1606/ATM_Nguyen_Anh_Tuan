@@ -1,6 +1,8 @@
 package com.atm.serivce.impl;
 
 import com.atm.controller.MainController;
+import com.atm.dao.AccountDAO;
+import com.atm.dao.AtmDAO;
 import com.atm.model.Account;
 import com.atm.model.Atm;
 import com.atm.serivce.IAccountService;
@@ -8,6 +10,12 @@ import com.atm.serivce.IAccountService;
 import java.util.List;
 
 public class AccountServiceImpl implements IAccountService {
+    private AccountDAO accountDAO;
+    private AtmDAO atmDAO;
+    public AccountServiceImpl() {
+        this.accountDAO = new AccountDAO();
+        this.atmDAO = new AtmDAO();
+    }
 
     @Override
     public boolean tranferMoney(Account account2) {
@@ -43,12 +51,12 @@ public class AccountServiceImpl implements IAccountService {
     }
 
     @Override
-    public Account authetication(List<Account> accounts, Account account) {
+    public Account authetication( Account account) {
         Long accountNumber = account.getAccountNumber();
         Account account1 = null;
         String password = account.getPassword();
 
-        for (Account item: accounts){
+        for (Account item: accountDAO.getAccounts()){
             if (item.getPassword().equals(password) && item.getAccountNumber().equals(accountNumber) && item.getStatus().equals(1)){
                 account1 = item;
                 break;
@@ -70,9 +78,9 @@ public class AccountServiceImpl implements IAccountService {
 
     @Override
     public  void pickMoney(Account account) {
-        Atm atm = MainController.getAtm();
+        Atm atm = atmDAO.getAtm();
         Account accountLogin = MainController.getAccountLogin();
-        List<Account> accounts =MainController.getAccounts();
+        List<Account> accounts = accountDAO.getAccounts();
         if (atm.getTotalMoney()<account.getPickMoney()){
             System.out.println("ATM Không đủ tiền mặt");
         }else if (accountLogin.getTotalMoney()<account.getPickMoney()){

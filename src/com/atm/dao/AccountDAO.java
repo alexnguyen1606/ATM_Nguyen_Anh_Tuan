@@ -9,8 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AccountDAO {
-    private  List<Account> accounts;
-    private  Account account;
+    private static   List<Account> accounts;
+    private static   Account account;
+    public AccountDAO(){
+        setAccounts();
+    }
     public  void setAccounts(){
         this.accounts = new ArrayList<>();
         AccountBuilder builder1 = new AccountBuilder.Builder().setAccountNumber(9209123210L).setFullName("Nguyễn Văn A").setTotalMoney(1000000L)

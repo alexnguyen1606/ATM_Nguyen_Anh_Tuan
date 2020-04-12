@@ -3,7 +3,9 @@ package com.atm.controller;
 import com.atm.model.Account;
 import com.atm.serivce.IAccountService;
 import com.atm.serivce.IAdminService;
+import com.atm.serivce.IAtmService;
 import com.atm.serivce.impl.AdminServiceImpl;
+import com.atm.serivce.impl.AtmServiceImpl;
 import com.atm.views.AdminView;
 
 import java.io.IOException;
@@ -13,10 +15,12 @@ public class AdminController {
     private Scanner scanner ;
     private AdminView adminView;
     private IAdminService adminService;
+    private IAtmService atmService;
     public AdminController(Scanner scanner) {
         this.scanner = scanner;
         adminView = new AdminView(this.scanner);
         adminService = new AdminServiceImpl();
+        atmService = new AtmServiceImpl();
     }
 
     public Integer index() throws IOException {
@@ -32,7 +36,7 @@ public class AdminController {
                     adminCheck=adminView.listUser();
                     break;
                 case 2:
-                    Account account = adminView.addAccount();
+                    Account account = adminView.formInputAccount();
                     adminService.addAccount(account);
                     adminCheck = 0;
                     break;
@@ -49,6 +53,9 @@ public class AdminController {
                     adminCheck = 0;
                     break;
                 case 5:
+                    adminCheck = adminView.atmInfo(atmService.findById());
+                    break;
+                case 6:
                     stop = false;
                     adminCheck = 11;
                     break;

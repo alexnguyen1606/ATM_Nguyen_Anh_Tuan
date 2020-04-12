@@ -18,7 +18,7 @@ public class HomeView {
         try {
             check = in.nextInt();
         }catch (Exception e){
-
+            return 0;
         }
         return check;
     }
