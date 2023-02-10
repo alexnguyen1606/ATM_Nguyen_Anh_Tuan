@@ -2,11 +2,9 @@ package com.atm.serivce;
 
 import com.atm.model.Account;
 
-import java.util.List;
-
 public interface IAccountService {
-    boolean tranferMoney(Account account);
-    Account authetication(Account account);
+    boolean transferMoney(Account account);
+    Account authentication(Account account);
     Account findByAccountNumber(Long accountNumber);
     void pickMoney(Account account);
 }

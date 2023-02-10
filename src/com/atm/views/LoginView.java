@@ -1,19 +1,18 @@
 package com.atm.views;
 
-import com.atm.controller.LoginController;
+import com.atm.factory.InputFactory;
 import com.atm.model.Account;
 
 import java.util.Scanner;
 
 public class LoginView {
-    private LoginController loginController;
     private Scanner in;
-    public LoginView(Scanner scanner){
-        this.in =scanner;
-        //loginController = new LoginController();
 
+    public LoginView() {
+        this.in = InputFactory.getInput();
     }
-    public Account login(){
+
+    public Account login() {
         Integer check = null;
         System.out.println("----Đăng nhập----");
         System.out.println("Nhập số tài khoản:");
@@ -24,7 +23,8 @@ public class LoginView {
         account.setPassword(in.next());
         return account;
     }
-    public void  loginFail(Scanner in){
+
+    public void loginFail() {
         System.out.println("----------------ATM---------------");
         System.out.println("----------Fail----------");
     }

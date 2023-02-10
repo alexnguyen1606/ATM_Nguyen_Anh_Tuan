@@ -1,7 +1,5 @@
 package com.atm.model;
 
-import com.atm.builder.AccountBuilder;
-
 public class Account {
     private String fullName;
     private Long totalMoney;
@@ -12,14 +10,15 @@ public class Account {
     private Long tranferAmount;
     private Long pickMoney;
 
-    public Account(AccountBuilder builder){
-        this.fullName = builder.getFullName();
-        this.totalMoney = builder.getTotalMoney();
-        this.accountNumber = builder.getAccountNumber();
-        this.password = builder.getPassword();
-        this.status = builder.getStatus();
-        this.role = builder.getRole();
+    public Account(Builder builder){
+        this.fullName = builder.fullName;
+        this.totalMoney = builder.totalMoney;
+        this.accountNumber = builder.accountNumber;
+        this.password = builder.password;
+        this.status = builder.status;
+        this.role = builder.role;
     }
+
     public Account() {
 
     }
@@ -88,4 +87,48 @@ public class Account {
     public void setPickMoney(Long pickMoney) {
         this.pickMoney = pickMoney;
     }
+
+    public static class Builder {
+        private String fullName;
+        private Long totalMoney;
+        private Long accountNumber;
+        private String password;
+        private Integer status;
+        private String role;
+
+        public Account build() {
+            return new Account(this);
+        }
+
+        public Builder setFullName(String fullName) {
+            this.fullName = fullName;
+            return this;
+        }
+
+        public Builder setTotalMoney(Long totalMoney) {
+            this.totalMoney = totalMoney;
+            return this;
+        }
+
+        public Builder setAccountNumber(Long accountNumber) {
+            this.accountNumber = accountNumber;
+            return this;
+        }
+
+        public Builder setPassword(String password) {
+            this.password = password;
+            return this;
+        }
+
+        public Builder setStatus(Integer status) {
+            this.status = status;
+            return this;
+        }
+
+        public Builder setRole(String role) {
+            this.role = role;
+            return this;
+        }
+    }
+
 }

@@ -1,18 +1,19 @@
 package com.atm.views;
 
 import com.atm.controller.MainController;
+import com.atm.factory.InputFactory;
 import com.atm.model.Account;
 
 import java.util.Scanner;
 
 public class UserView {
-    private Scanner scanner;
+    private final Scanner scanner;
 
-    public UserView(Scanner scanner) {
-        this.scanner = scanner;
+    public UserView() {
+        this.scanner = InputFactory.getInput();
     }
 
-    public Integer index(){
+    public Integer index() {
         System.out.println("------------ATM---------");
         System.out.println("------Chức năng --------");
         System.out.println("1.Kiểm tra số dư");
@@ -35,20 +36,17 @@ public class UserView {
         }
         return userCheck;
     }
-    public Integer checkBalance(){
+    public void checkBalance(){
         Account account = MainController.getAccountLogin();
         System.out.println("Số dư:"+ account.getTotalMoney());
-        return 0;
     }
-    public Account tranferMoney(){
-        Account account = new Account();
+    public void transferMoney(Account account){
         System.out.println("------Chuyển tiền-------");
         System.out.println("Nhập số tài khoản:");
         account.setAccountNumber(scanner.nextLong());
         System.out.println("Nhập số tiền chuyển:");
         account.setTranferAmount(scanner.nextLong());
         scanner.nextLine();
-        return account;
     }
     public Account pickMoney(){
         Account account = new Account();

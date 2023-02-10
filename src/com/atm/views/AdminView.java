@@ -1,6 +1,7 @@
 package com.atm.views;
 
-import com.atm.controller.MainController;
+import com.atm.dao.AccountDAO;
+import com.atm.factory.InputFactory;
 import com.atm.model.Account;
 import com.atm.model.Atm;
 
@@ -8,14 +9,16 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class AdminView {
-    private Scanner scanner;
 
-    public AdminView(Scanner scanner) {
-        this.scanner = scanner;
+    private Scanner scanner;
+    private AccountDAO accountDAO;
+
+    public AdminView() {
+        this.scanner = InputFactory.getInput();
+        this.accountDAO = AccountDAO.getInstance();
     }
 
     public Integer index() throws IOException {
-
 
         System.out.println("-----------ADMIN----------");
         System.out.println("------Chức năng --------");
@@ -26,29 +29,16 @@ public class AdminView {
         System.out.println("5.Thông tin ATM");
         System.out.println("6.Đăng xuất");
         Integer adminCheck = scanner.nextInt();
-        Integer check = null;
-        switch (adminCheck){
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            case 6:
-                break;
-            default:
-                System.out.println("Chỉ được chọn các nút 1-6");
-                index();
+        if(adminCheck < 1 || adminCheck > 6) {
+            System.out.println("Chỉ được chọn các nút 1-6");
+            return index();
         }
+
         return adminCheck;
     }
-    public Integer listUser(){
+    public void listUser(){
         System.out.println("------Danh sách tài khoản-------");
-        for (Account account : MainController.getAccounts()){
+        for (Account account : accountDAO.getAccounts()){
             System.out.println("Chủ tài khoản:"+account.getFullName());
             System.out.println("Số tài khoản:"+account.getAccountNumber());
             if (account.getStatus()==1){
@@ -57,7 +47,6 @@ public class AdminView {
                 System.out.println("---Trạng thái : Disabled");
             }
         }
-        return 0;
     }
     public Long active(){
         System.out.println("------Kích hoạt tài khoản-------");
@@ -69,9 +58,8 @@ public class AdminView {
     }
     public Long disable(){
         System.out.println("------Disable tài khoản-------");
-        Long accountNumber = null;
         System.out.println("Nhập số tài khoản:");
-        accountNumber = scanner.nextLong();
+        Long accountNumber = scanner.nextLong();
         scanner.nextLine();
         return accountNumber;
     }

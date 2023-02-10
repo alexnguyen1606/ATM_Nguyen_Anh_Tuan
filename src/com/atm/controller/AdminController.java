@@ -1,7 +1,6 @@
 package com.atm.controller;
 
 import com.atm.model.Account;
-import com.atm.serivce.IAccountService;
 import com.atm.serivce.IAdminService;
 import com.atm.serivce.IAtmService;
 import com.atm.serivce.impl.AdminServiceImpl;
@@ -9,16 +8,14 @@ import com.atm.serivce.impl.AtmServiceImpl;
 import com.atm.views.AdminView;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 public class AdminController {
-    private Scanner scanner ;
     private AdminView adminView;
     private IAdminService adminService;
     private IAtmService atmService;
-    public AdminController(Scanner scanner) {
-        this.scanner = scanner;
-        adminView = new AdminView(this.scanner);
+
+    public AdminController() {
+        adminView = new AdminView();
         adminService = new AdminServiceImpl();
         atmService = new AtmServiceImpl();
     }
@@ -30,10 +27,11 @@ public class AdminController {
         do {
             switch (adminCheck){
                 case 0:
-                   adminCheck= adminView.index();
-                   break;
+                    adminCheck = adminView.index();
+                    break;
                 case 1:
-                    adminCheck=adminView.listUser();
+                    adminView.listUser();
+                    adminCheck = 0;
                     break;
                 case 2:
                     Account account = adminView.formInputAccount();
@@ -47,8 +45,8 @@ public class AdminController {
                     adminCheck = 0;
                     break;
                 case 4:
-                     accountNumber = adminView.disable();
-                    adminService.disableAcount(accountNumber);
+                    accountNumber = adminView.disable();
+                    adminService.disableAccount(accountNumber);
                     accountNumber = null;
                     adminCheck = 0;
                     break;

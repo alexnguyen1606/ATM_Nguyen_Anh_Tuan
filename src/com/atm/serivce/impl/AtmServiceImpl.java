@@ -4,14 +4,13 @@ import com.atm.controller.MainController;
 import com.atm.dao.AtmDAO;
 import com.atm.model.Account;
 import com.atm.model.Atm;
-import com.atm.serivce.IAccountService;
 import com.atm.serivce.IAtmService;
 
 public class AtmServiceImpl implements IAtmService {
     private AtmDAO atmDAO;
 
     public AtmServiceImpl() {
-        this.atmDAO =new AtmDAO();
+        this.atmDAO = new AtmDAO();
     }
 
     @Override
@@ -27,7 +26,7 @@ public class AtmServiceImpl implements IAtmService {
     @Override
     public void addMoney(Long money) {
         Atm atm = MainController.getAtm();
-        atm.setTotalMoney(atm.getTotalMoney()+money);
+        atm.setTotalMoney(atm.getTotalMoney() + money);
         MainController.setAtm(atm);
     }
 

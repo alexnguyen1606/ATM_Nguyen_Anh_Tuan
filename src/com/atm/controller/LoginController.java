@@ -5,39 +5,33 @@ import com.atm.serivce.IAccountService;
 import com.atm.serivce.impl.AccountServiceImpl;
 import com.atm.views.LoginView;
 
-import java.util.Scanner;
-
 public class LoginController {
     private LoginView loginView;
-    private Scanner scanner;
     private IAccountService accountService;
-    public LoginController(Scanner scanner){
 
-        this.scanner = scanner;
-        loginView = new LoginView(this.scanner);
+    public LoginController() {
+        loginView = new LoginView();
         accountService = new AccountServiceImpl();
     }
-    public Account login(){
-        Integer check = null;
-        Integer homeCheck= 1;
-        Boolean stop=true;
-        Account account = null;
-        while (stop){
 
-            switch (homeCheck){
+    public Account login() {
+        int homeCheck = 1;
+        boolean stop = true;
+        Account account = null;
+
+        while (stop) {
+            switch (homeCheck) {
                 case 1:
                     account = loginView.login();
-                    account = accountService.authetication(account);
-                    if (account==null){
-                        stop = true;
+                    account = accountService.authentication(account);
+                    if (account == null) {
                         homeCheck = 2;
-                    }else {
+                    } else {
                         stop = false;
                     }
                     break;
                 case 2:
-                    loginView.loginFail(scanner);
-                    check = 0;
+                    loginView.loginFail();
                     stop = false;
                     break;
                 default:
